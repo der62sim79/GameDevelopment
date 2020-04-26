@@ -16,9 +16,10 @@ public class ObjectsGame extends BasicGame {
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
-
+        //actors ArrayList werden alle Objekte/Class hinzugefügt
         this.actors = new ArrayList<>();
 
+        //objekt wird initiert für den Start
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
             Rectangle rectangle = new Rectangle(random.nextInt(600), random.nextInt(500),
@@ -40,7 +41,7 @@ public class ObjectsGame extends BasicGame {
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
-
+        //mit actor for each Schleife werden alle Classen angesprochen
         for (Actor actor : this.actors) {
             actor.update(delta);
         }

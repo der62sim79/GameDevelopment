@@ -2,6 +2,7 @@ package at.ta.games.firstgame;
 
 import org.newdawn.slick.Graphics;
 
+//mit implements werden die methoden vom Interface hinzugefügt
 public class Ellipse implements Actor {
     private float x, y;
     private float speed;

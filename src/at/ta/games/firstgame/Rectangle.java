@@ -18,6 +18,8 @@ public class Rectangle implements Actor {
 
     }
 
+    // es wird ein render sowie update methode  angelegt mit Graphics und delta, diese methode wir überall verwenden
+    // und beim game dann als for each Schleife zusammen gefasst.
     public void render(Graphics graphics) {
         graphics.drawRect(this.x, this.y, 10, 10);
     }
