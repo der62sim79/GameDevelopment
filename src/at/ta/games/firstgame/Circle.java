@@ -20,6 +20,10 @@ public class Circle implements Actor {
 
     public void render(Graphics graphics) {
         graphics.drawOval(this.x, this.y, this.diameter, this.diameter);
+        this.diameter ++;
+        if (this.diameter > 50) {
+            this.diameter = 10;
+        }
     }
 
     public void update(int delta) {

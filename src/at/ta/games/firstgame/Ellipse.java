@@ -2,6 +2,8 @@ package at.ta.games.firstgame;
 
 import org.newdawn.slick.Graphics;
 
+import java.util.Random;
+
 //mit implements werden die methoden vom Interface hinzugefügt
 public class Ellipse implements Actor {
     private float x, y;
@@ -16,6 +18,7 @@ public class Ellipse implements Actor {
     @Override
     public void render(Graphics graphics) {
         graphics.drawOval(this.x, this.y, 50, 20);
+
     }
 
     @Override
