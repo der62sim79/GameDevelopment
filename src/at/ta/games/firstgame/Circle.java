@@ -7,7 +7,7 @@ import java.util.Random;
 public class Circle implements Actor {
     private float x, y;
     private float speed;
-    private int diameter;
+    private float diameter;
     Random random;
 
     public Circle() {
@@ -20,10 +20,7 @@ public class Circle implements Actor {
 
     public void render(Graphics graphics) {
         graphics.drawOval(this.x, this.y, this.diameter, this.diameter);
-        this.diameter ++;
-        if (this.diameter > 50) {
-            this.diameter = 10;
-        }
+
     }
 
     public void update(int delta) {
@@ -32,6 +29,10 @@ public class Circle implements Actor {
             this.y = 0;
             this.diameter = 10;
             this.x = this.random.nextInt(800);
+        }
+        this.diameter += 0.009;
+        if (this.diameter > 100) {
+            this.diameter = 10;
         }
     }
 }
