@@ -1,13 +1,12 @@
 package at.ta.snowworld;
 
-import at.ta.games.firstgame.ObjectsGame;
 import org.newdawn.slick.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Snowworld extends BasicGame {
-    private List<Actor> snowfalkes;
+    private List<Actor> actors;
 
     public Snowworld(String title) {
         super(title);
@@ -15,25 +14,29 @@ public class Snowworld extends BasicGame {
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
-        this.snowfalkes = new ArrayList<>();
+
+
+        this.actors = new ArrayList<>();
+        Yeti yeti = new Yeti();
+        this.actors.add(yeti);
         for (int i = 0; i < 50; i++) {
-            this.snowfalkes.add(new Snowflake(Snowflake.SIZE.BIG));
-            this.snowfalkes.add(new Snowflake(Snowflake.SIZE.MEDIUMS));
-            this.snowfalkes.add(new Snowflake(Snowflake.SIZE.SMALL));
+            this.actors.add(new Snowflake(Snowflake.SIZE.BIG));
+            this.actors.add(new Snowflake(Snowflake.SIZE.MEDIUMS));
+            this.actors.add(new Snowflake(Snowflake.SIZE.SMALL));
         }
 
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
-        for (Actor actor : this.snowfalkes) {
+        for (Actor actor : this.actors) {
             actor.update(delta);
         }
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        for (Actor actor : this.snowfalkes) {
+        for (Actor actor : this.actors) {
             actor.render(graphics);
         }
     }
