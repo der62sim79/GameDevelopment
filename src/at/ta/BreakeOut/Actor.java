@@ -1,4 +1,4 @@
-package at.ta.rocket;
+package at.ta.BreakeOut;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

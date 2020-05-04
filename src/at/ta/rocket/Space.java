@@ -31,6 +31,7 @@ public class Space extends BasicGame {
 
 
 
+
         for (int i = 0; i < 4; i++) {
             SpaceCircle spaceCircle = new SpaceCircle();
             this.actors.add(spaceCircle);

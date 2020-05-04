@@ -23,7 +23,7 @@ public class Canonball implements CollisionActor {
         this.y = y;
         this.diameter = 7;
         this.collisionShape = new Circle(this.x, this.y, diameter);
-        this.collisionActors = new ArrayList<CollisionActor>();
+        this.collisionActors = new ArrayList<>();
     }
 
     @Override
