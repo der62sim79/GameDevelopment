@@ -9,40 +9,40 @@ import org.newdawn.slick.geom.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Bricks implements Actor, CollisionActor {
     private float x, y;
     private Shape collisionShape;
-    Random random;
     private List<CollisionActor> collisionActors;
     private int hitCount;
 
 
     public Bricks(int x, int y) {
-        Random random = new Random();
         this.x = x;
         this.y = y;
         this.collisionShape = new Rectangle(this.x, this.y, 50, 10);
         this.collisionActors = new ArrayList<>();
-
-
     }
 
 
     @Override
     public void render(Graphics graphics) throws SlickException {
         if(!isDestroyed()) {
-            graphics.setColor(Color.darkGray);
+            Color color = Color.darkGray;
+            if(this.hitCount == 1){
+                color = Color.red;
+            } else if(this.hitCount == 2){
+                color = Color.green;
+            }
+            graphics.setColor(color);
             graphics.fillRect(this.x, this.y, 50, 10);
             graphics.draw(this.collisionShape);
         }
-
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
-        
+
     }
 
     @Override

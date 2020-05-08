@@ -17,7 +17,6 @@ public class Ball implements Actor {
     private List<CollisionActor> collisionActors;
     private float velocityX;
     private float velocityY;
-    private float speed;
     private List<Bricks> bricks;
 
 
@@ -45,13 +44,16 @@ public class Ball implements Actor {
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
+        //for schleife für damit der Ball alle Akteure erkennt.
         for (CollisionActor collisionActor : collisionActors) {
             if (this.collisionShape.intersects(collisionActor.getCollisionShape())) {
                 this.velocityY = -this.velocityY;
             }
         }
 
+        //hier wird eine ArrayList erstellt dammit die Bricks danach herausgelöscht werden können ohne absturz.
         ArrayList<Bricks> destroyedBricks = new ArrayList<>();
+        //for schleife damit der ball nur die bricks erkennt.
         for (Bricks brick : bricks) {
             if (this.collisionShape.intersects(brick.getCollisionShape())) {
                 brick.hit();
@@ -92,10 +94,12 @@ public class Ball implements Actor {
         }
     }
 
+    //hier die methode für die Ateurer hinzufügen (Array List-CollisonActor)
     public void addCollisionPartner(CollisionActor collisionActor) {
         this.collisionActors.add(collisionActor);
     }
 
+    //hier die methode für die Brick einfügen (Array List-Brick)
     public void addBricks(Bricks bricks) {
         this.bricks.add(bricks);
     }

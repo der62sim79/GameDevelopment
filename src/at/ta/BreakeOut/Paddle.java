@@ -48,8 +48,8 @@ public class Paddle implements Actor, CollisionActor {
             }
         }
 
-        this.collisionShape.setCenterX(this.x +71 );
-        this.collisionShape.setCenterY(this.y );
+        this.collisionShape.setCenterX(this.x + 70);
+        this.collisionShape.setCenterY(this.y);
     }
 
 
