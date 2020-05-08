@@ -4,6 +4,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Ball implements Actor {
     private float velocityX;
     private float velocityY;
     private float speed;
+    private List<Bricks> bricks;
 
 
     public Ball() throws SlickException {
@@ -29,6 +31,7 @@ public class Ball implements Actor {
         this.velocityX = 6;
         this.velocityY = 7;
         this.collisionActors = new ArrayList<CollisionActor>();
+        this.bricks = new ArrayList<>();
 
     }
 
@@ -41,10 +44,26 @@ public class Ball implements Actor {
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
+
         for (CollisionActor collisionActor : collisionActors) {
             if (this.collisionShape.intersects(collisionActor.getCollisionShape())) {
                 this.velocityY = -this.velocityY;
             }
+        }
+
+        ArrayList<Bricks> destroyedBricks = new ArrayList<>();
+        for (Bricks brick : bricks) {
+            if (this.collisionShape.intersects(brick.getCollisionShape())) {
+                brick.hit();
+                if (brick.isDestroyed()) {
+                    destroyedBricks.add(brick);
+                }
+            }
+        }
+
+        for (Bricks brick : destroyedBricks) {
+            bricks.remove(brick);
+            collisionActors.remove(brick);
         }
         moveBall(delta);
 
@@ -57,7 +76,6 @@ public class Ball implements Actor {
     private void moveBall(float delta) {
         this.x += delta / this.velocityX;
         this.y += delta / this.velocityY;
-
 
         if (this.x < 5) {
             this.velocityX = -this.velocityX;
@@ -74,8 +92,15 @@ public class Ball implements Actor {
         }
     }
 
-    public void addCollisionPartner(Paddle paddle) {
-        this.collisionActors.add(paddle);
+    public void addCollisionPartner(CollisionActor collisionActor) {
+        this.collisionActors.add(collisionActor);
     }
 
+    public void addBricks(Bricks bricks) {
+        this.bricks.add(bricks);
+    }
+
+    public Shape getCollisionShape() {
+        return collisionShape;
+    }
 }

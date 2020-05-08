@@ -36,16 +36,15 @@ public class Screen extends BasicGame {
         this.actors.add(ball);
         this.ball.addCollisionPartner(paddle);
 
-        for (int i = 0; i <20 ; i++) {
-            Bricks bricks = new Bricks();
+        for (int i = 0; i < 10; i++) {
+            Bricks bricks = new Bricks((i * 50) , 100);
             this.bricks = bricks;
             this.collisionActors.add(bricks);
             this.actors.add(bricks);
+            this.ball.addCollisionPartner(bricks);
+            this.ball.addBricks(bricks);
 
         }
-
-
-
 
     }
 

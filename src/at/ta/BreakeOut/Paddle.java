@@ -1,6 +1,6 @@
 package at.ta.BreakeOut;
 
-import at.ta.rocket.SpaceCircle;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
