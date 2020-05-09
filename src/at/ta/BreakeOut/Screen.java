@@ -12,6 +12,7 @@ public class Screen extends BasicGame {
     private List<Actor> actors;
     private Image backgraund;
     private Bricks bricks;
+    private GameAds gameAds;
 
 
     public Screen(String title) {
@@ -49,6 +50,10 @@ public class Screen extends BasicGame {
             }
         }
 
+        this.gameAds = new GameAds();
+        this.actors.add(gameAds);
+
+
     }
 
     @Override
@@ -57,10 +62,23 @@ public class Screen extends BasicGame {
         for (Actor actor : this.actors) {
             actor.update(gameContainer, delta);
         }
+
+
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+
+        int gamescore = ball.getScore();
+        gameAds.setScore(gamescore);
+
+        int lives = ball.getLives();
+        gameAds.setLives(lives);
+        if (lives == 0) {
+            System.out.println("Edne");
+            System.exit(0);
+        }
+
 
         backgraund.draw();
         for (Actor actor : this.actors) {

@@ -15,12 +15,13 @@ public class Bricks implements Actor, CollisionActor {
     private Shape collisionShape;
     private List<CollisionActor> collisionActors;
     private int hitCount;
+    private Ball ball;
 
 
     public Bricks(int x, int y) {
         this.x = x;
         this.y = y;
-        this.collisionShape = new Rectangle(this.x, this.y, 50, 10);
+        this.collisionShape = new Rectangle(this.x, this.y, 51, 10);
         this.collisionActors = new ArrayList<>();
     }
 
@@ -43,6 +44,8 @@ public class Bricks implements Actor, CollisionActor {
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
+        collisionShape.setCenterX(this.x + 25);
+        collisionShape.setCenterY(this.y + 5);
     }
 
     @Override
@@ -57,5 +60,6 @@ public class Bricks implements Actor, CollisionActor {
     public boolean isDestroyed(){
         return this.hitCount >= 3;
     }
+
 
 }

@@ -18,6 +18,10 @@ public class Ball implements Actor {
     private float velocityX;
     private float velocityY;
     private List<Bricks> bricks;
+    private GameAds gameAds;
+
+    public int score;
+    public int lives;
 
 
     public Ball() throws SlickException {
@@ -31,7 +35,8 @@ public class Ball implements Actor {
         this.velocityY = 7;
         this.collisionActors = new ArrayList<CollisionActor>();
         this.bricks = new ArrayList<>();
-
+        this.score = 0;
+        this.lives = 3;
     }
 
     @Override
@@ -47,7 +52,7 @@ public class Ball implements Actor {
         //for schleife für damit der Ball alle Akteure erkennt.
         for (CollisionActor collisionActor : collisionActors) {
             if (this.collisionShape.intersects(collisionActor.getCollisionShape())) {
-                this.velocityY = -this.velocityY;
+                this.velocityY = -4; 
             }
         }
 
@@ -57,6 +62,7 @@ public class Ball implements Actor {
         for (Bricks brick : bricks) {
             if (this.collisionShape.intersects(brick.getCollisionShape())) {
                 brick.hit();
+                score++;
                 if (brick.isDestroyed()) {
                     destroyedBricks.add(brick);
                 }
@@ -66,9 +72,10 @@ public class Ball implements Actor {
         for (Bricks brick : destroyedBricks) {
             bricks.remove(brick);
             collisionActors.remove(brick);
-        }
-        moveBall(delta);
 
+        }
+
+        moveBall(delta);
 
         this.collisionShape.setCenterX(this.x + 19);
         this.collisionShape.setCenterY(this.y + 18);
@@ -89,6 +96,7 @@ public class Ball implements Actor {
             this.velocityY = -this.velocityY;
         }
         if (this.y > 590) {
+            lives--;
             this.x = 200;
             this.y = 219;
         }
@@ -106,5 +114,13 @@ public class Ball implements Actor {
 
     public Shape getCollisionShape() {
         return collisionShape;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getLives() {
+        return lives;
     }
 }
