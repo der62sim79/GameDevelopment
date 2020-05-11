@@ -53,6 +53,16 @@ public class Bricks implements Actor, CollisionActor {
         return collisionShape;
     }
 
+    @Override
+    public float getX() {
+        return this.x;
+    }
+
+    @Override
+    public float getY() {
+        return this.y;
+    }
+
     public void hit() {
         this.hitCount++;
     }

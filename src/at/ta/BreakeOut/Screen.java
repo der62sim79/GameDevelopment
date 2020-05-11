@@ -9,10 +9,13 @@ public class Screen extends BasicGame {
     private List<CollisionActor> collisionActors;
     private Paddle paddle;
     private Ball ball;
-    private List<Actor> actors;
+    private List<Actor> actors; //is shown while game is running
+    private List<Actor> gameOverActors; // actors shown when game is over
     private Image backgraund;
     private Bricks bricks;
     private GameAds gameAds;
+
+
 
 
     public Screen(String title) {
@@ -26,6 +29,7 @@ public class Screen extends BasicGame {
 
         this.collisionActors = new ArrayList<>();
         this.actors = new ArrayList<>();
+        this.gameOverActors = new ArrayList<>();
 
         Paddle paddle = new Paddle();
         this.paddle = paddle;
@@ -53,6 +57,8 @@ public class Screen extends BasicGame {
         this.gameAds = new GameAds();
         this.actors.add(gameAds);
 
+        YourLoseScreen yourLoseScreen = new YourLoseScreen();
+        this.gameOverActors.add(yourLoseScreen);
 
     }
 
@@ -72,20 +78,31 @@ public class Screen extends BasicGame {
         int gamescore = ball.getScore();
         gameAds.setScore(gamescore);
 
+
         int lives = ball.getLives();
         gameAds.setLives(lives);
-        if (lives == 0) {
-            System.out.println("Edne");
-            System.exit(0);
+        if (lives <= 0) {
+            showGameOverScreen(graphics);
+        } else{
+            showPlayingScreen(graphics);
+
         }
+    }
 
+    private void showGameOverScreen(Graphics graphics) throws SlickException {
+        for (Actor actor: this.gameOverActors) {
+            actor.render(graphics);
+        }
+    }
 
+    private void showPlayingScreen(Graphics graphics) throws SlickException {
+        // show normal objects
         backgraund.draw();
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }
-
     }
+
 
     public static void main(String[] argv) {
         try {

@@ -19,6 +19,7 @@ public class Ball implements Actor {
     private float velocityY;
     private List<Bricks> bricks;
     private GameAds gameAds;
+    private Paddle paddle;
 
     public int score;
     public int lives;
@@ -52,9 +53,22 @@ public class Ball implements Actor {
         //for schleife für damit der Ball alle Akteure erkennt.
         for (CollisionActor collisionActor : collisionActors) {
             if (this.collisionShape.intersects(collisionActor.getCollisionShape())) {
-                this.velocityY = -4; 
+                this.velocityY = -this.velocityY;
+                float distance = collisionActor.getX() - this.x;
+                float distanceY = collisionActor.getY() - this.y;
+                distance = Math.abs(distance);
+                if (distance < 10) {
+                    // link getroffen
+                    this.velocityX = -this.velocityX;
+                }
+                if (distance > 125) {
+                    this.velocityX = -this.velocityX;
+                }
+                System.out.println(distanceY);
+
             }
         }
+
 
         //hier wird eine ArrayList erstellt dammit die Bricks danach herausgelöscht werden können ohne absturz.
         ArrayList<Bricks> destroyedBricks = new ArrayList<>();
@@ -74,6 +88,7 @@ public class Ball implements Actor {
             collisionActors.remove(brick);
 
         }
+
 
         moveBall(delta);
 

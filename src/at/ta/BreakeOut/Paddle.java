@@ -20,7 +20,7 @@ public class Paddle implements Actor, CollisionActor {
         this.paddle = tmp.getScaledCopy(140, 20);
         this.x = 300;
         this.y = 500;
-        this.collisionShape = new Rectangle(this.x, this.y, 140, 1);
+        this.collisionShape = new Rectangle(this.x, this.y, 130, 10);
         this.collisionShapes = new ArrayList<>();
     }
 
@@ -49,7 +49,7 @@ public class Paddle implements Actor, CollisionActor {
         }
 
         this.collisionShape.setCenterX(this.x + 70);
-        this.collisionShape.setCenterY(this.y);
+        this.collisionShape.setCenterY(this.y + 6);
     }
 
 
@@ -57,4 +57,16 @@ public class Paddle implements Actor, CollisionActor {
     public Shape getCollisionShape() {
         return collisionShape;
     }
+
+    @Override
+    public float getX() {
+        return this.x;
+    }
+
+    @Override
+    public float getY() {
+        return this.y;
+    }
+
+
 }
