@@ -28,16 +28,16 @@ public class Bricks implements Actor, CollisionActor {
 
     @Override
     public void render(Graphics graphics) throws SlickException {
-        if(!isDestroyed()) {
+        if (!isDestroyed()) {
             Color color = Color.darkGray;
-            if(this.hitCount == 1){
+            if (this.hitCount == 1) {
                 color = Color.red;
-            } else if(this.hitCount == 2){
+            } else if (this.hitCount == 2) {
                 color = Color.green;
             }
             graphics.setColor(color);
             graphics.fillRect(this.x, this.y, 50, 10);
-            graphics.draw(this.collisionShape);
+            //graphics.draw(this.collisionShape);
         }
     }
 
@@ -67,7 +67,7 @@ public class Bricks implements Actor, CollisionActor {
         this.hitCount++;
     }
 
-    public boolean isDestroyed(){
+    public boolean isDestroyed() {
         return this.hitCount >= 3;
     }
 

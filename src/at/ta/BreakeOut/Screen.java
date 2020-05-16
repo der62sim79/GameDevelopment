@@ -16,8 +16,6 @@ public class Screen extends BasicGame {
     private GameAds gameAds;
 
 
-
-
     public Screen(String title) {
         super(title);
     }
@@ -83,14 +81,14 @@ public class Screen extends BasicGame {
         gameAds.setLives(lives);
         if (lives <= 0) {
             showGameOverScreen(graphics);
-        } else{
+        } else {
             showPlayingScreen(graphics);
 
         }
     }
 
     private void showGameOverScreen(Graphics graphics) throws SlickException {
-        for (Actor actor: this.gameOverActors) {
+        for (Actor actor : this.gameOverActors) {
             actor.render(graphics);
         }
     }

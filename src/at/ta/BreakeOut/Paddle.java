@@ -29,7 +29,7 @@ public class Paddle implements Actor, CollisionActor {
     public void render(Graphics graphics) {
 
         paddle.draw(this.x, this.y);
-        graphics.draw(collisionShape);
+        //graphics.draw(collisionShape);
     }
 
     @Override

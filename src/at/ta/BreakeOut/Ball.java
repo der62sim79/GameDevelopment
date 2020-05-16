@@ -4,7 +4,6 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +31,8 @@ public class Ball implements Actor {
         this.y = 419;
         this.diameter = 18;
         this.collisionShape = new Circle(this.x, this.y, diameter);
-        this.velocityX = 6;
-        this.velocityY = 7;
+        this.velocityX = 5;
+        this.velocityY = 5;
         this.collisionActors = new ArrayList<CollisionActor>();
         this.bricks = new ArrayList<>();
         this.score = 0;
@@ -43,7 +42,7 @@ public class Ball implements Actor {
     @Override
     public void render(Graphics graphics) throws SlickException {
         ball.draw(this.x, this.y);
-        graphics.draw(this.collisionShape);
+        //graphics.draw(this.collisionShape);
 
     }
 
@@ -54,18 +53,19 @@ public class Ball implements Actor {
         for (CollisionActor collisionActor : collisionActors) {
             if (this.collisionShape.intersects(collisionActor.getCollisionShape())) {
                 this.velocityY = -this.velocityY;
-                float distance = collisionActor.getX() - this.x;
-                float distanceY = collisionActor.getY() - this.y;
-                distance = Math.abs(distance);
-                if (distance < 10) {
-                    // link getroffen
-                    this.velocityX = -this.velocityX;
+                if (collisionActor instanceof Paddle) {
+                    float distance = collisionActor.getX() - this.x;
+                    float distanceY = collisionActor.getY() - this.y;
+                    distance = Math.abs(distance);
+                    if ((distance - this.diameter) < 5) {
+                        // link getroffen
+                        this.velocityX = -this.velocityX;
+                    }
+                    if (distance > 125) {
+                        this.velocityX = -this.velocityX;
+                    }
+                    System.out.println(distanceY);
                 }
-                if (distance > 125) {
-                    this.velocityX = -this.velocityX;
-                }
-                System.out.println(distanceY);
-
             }
         }
 
