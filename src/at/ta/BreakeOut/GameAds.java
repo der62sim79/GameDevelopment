@@ -38,6 +38,7 @@ public class GameAds implements Actor {
     public void render(Graphics graphics) throws SlickException {
         font.drawString(10, 550, getScore());
         font.drawString(600, 550, getLives());
+
     }
 
     @Override
