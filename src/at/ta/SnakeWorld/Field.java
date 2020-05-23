@@ -107,21 +107,7 @@ public class Field extends BasicGame {
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        setRandomFoodBlock();
         background.draw();
-//
-//        //Grid
-//        graphics.setColor(Color.gray);
-//        for (int i = 0; i < 16; i++) {
-//            for (int j = 0; j < 16; j++) {
-//                graphics.drawRect(i * 32 + xOff, j * 32 + yOff, 32, 32);
-//            }
-//
-//        }
-//
-//        //Border
-//        graphics.setColor(Color.white);
-//        graphics.drawRect(xOff, yOff, 512, 512);
 
         for (Actor actor : this.actors) {
             actor.render(graphics);
@@ -146,17 +132,7 @@ public class Field extends BasicGame {
 
     }
 
-    public void setRandomFoodBlock() {
-        Random random = new Random();
-        int randomX;
-        int randomY;
 
-        // generate new x, y position until we find a free spot
-
-            randomX = random.nextInt(800) + GRID_SIZE;
-            randomY = random.nextInt(600) + GRID_SIZE;
-
-    }
 
     public static void main(String[] argv) {
         try {
