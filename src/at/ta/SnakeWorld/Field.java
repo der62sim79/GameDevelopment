@@ -1,11 +1,11 @@
 package at.ta.SnakeWorld;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Rectangle;
+
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 public class Field extends BasicGame {
 
@@ -16,6 +16,10 @@ public class Field extends BasicGame {
     private List<Actor> actors;
     public static final int SPEED = 500;
     private String direction;
+
+    public static final int WINDOW_WIDTH = 800;
+    public static final int WINDOW_HEIGHT = 420;
+
 
 
 
@@ -29,10 +33,13 @@ public class Field extends BasicGame {
         Image tmp = new Image("testdata/myPicture/images.jpg");
         this.background = tmp.getScaledCopy(800, 600);
 
+
         this.actors = new ArrayList<>();
-        Snake s1 = new Snake(9 ,8);
-        Snake s2 = new Snake(10,8);
-        Snake s3 = new Snake(11,8);
+        Snake s1 = new Snake(9, 8);
+        Snake s2 = new Snake(10, 8);
+        Snake s3 = new Snake(11, 8);
+
+
         s1.setNext(s2);
         s2.setNext(s3);
         this.tail = s1;
@@ -103,6 +110,8 @@ public class Field extends BasicGame {
             this.timeRun = 0;
         }
 
+
+
     }
 
     @Override
@@ -131,7 +140,6 @@ public class Field extends BasicGame {
         }
 
     }
-
 
 
     public static void main(String[] argv) {

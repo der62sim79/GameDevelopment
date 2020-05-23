@@ -1,10 +1,11 @@
 package at.ta.SnakeWorld;
 
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-public class Snake implements Actor {
+public class Snake implements Actor{
 
     private int x, y;
     private Snake next;
@@ -47,4 +48,8 @@ public class Snake implements Actor {
     public void setNext(Snake next) {
         this.next = next;
     }
+
+
+
+
 }
