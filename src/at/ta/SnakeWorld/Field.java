@@ -1,19 +1,23 @@
 package at.ta.SnakeWorld;
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Field extends BasicGame {
 
-    public static final int menu = 0;
     public static final int GRID_SIZE = 30;
-    private Snake first, last, snakeBody;
+    private Snake head, tail;
     private int timeRun = 0;
     private Image background;
     private List<Actor> actors;
-    private Snake snake;
+    public static final int SPEED = 500;
+    private String direction;
+
+
 
     public Field(String title) {
         super(title);
@@ -26,14 +30,22 @@ public class Field extends BasicGame {
         this.background = tmp.getScaledCopy(800, 600);
 
         this.actors = new ArrayList<>();
-        this.first = new Snake(4, 4);
-        this.snakeBody = new Snake(4, 5);
-        this.last = new Snake(4, 6);
+        Snake s1 = new Snake(9 ,8);
+        Snake s2 = new Snake(10,8);
+        Snake s3 = new Snake(11,8);
+        s1.setNext(s2);
+        s2.setNext(s3);
+        this.tail = s1;
+        this.head = s3;
+        this.actors.add(s1);
+        this.actors.add(s2);
+        this.actors.add(s3);
 
+        this.direction = "right";
 
-        this.actors.add(first);
-        this.actors.add(last);
-        this.actors.add(snakeBody);
+        Food food = new Food();
+        this.actors.add(food);
+
 
     }
 
@@ -43,35 +55,73 @@ public class Field extends BasicGame {
         for (Actor actor : actors) {
             actor.update(gameContainer, delta);
         }
-        timeRun += delta;
-        if (timeRun > 500) {
-            timeRun = 0;
 
-            int newX, newY;
-            if (1 == 1) {
-                newY = this.first.getY() - 1;
-                newX = this.first.getX();
+
+        this.timeRun += delta;
+        if (this.timeRun > SPEED) {
+
+            Snake old = this.tail;
+            this.tail = old.getNext();
+            old.setNext(null);
+            head.setNext(old);
+
+
+            int newX = this.head.getX();
+            int newY = this.head.getY();
+
+            //Move
+            switch (direction) {
+                case "right":
+                    newX++;
+                    if (newX > 26) {
+                        newX = 0;
+                    }
+                    break;
+                case "left":
+                    newX--;
+                    if (newX < 0) {
+                        newX = 26;
+                    }
+                    break;
+                case "up":
+                    newY--;
+                    if (newY < 0) {
+                        newY = 14;
+                    }
+                    break;
+                case "down":
+                    newY++;
+                    if (newY > 14) {
+                        newY = 0;
+                    }
+                    break;
             }
+            old.setX(newX);
+            old.setY(newY);
 
-
-            Snake oldLast = this.last;
-            this.last = this.first.getNext();
-
-            this.first.setNext(this.last);
-            oldLast.setNext(null);
-            this.first = oldLast;
-
-            this.first.setY(newY);
-            this.first.setX(newX);
-
+            this.head = old;
+            this.timeRun = 0;
         }
 
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-
+        setRandomFoodBlock();
         background.draw();
+//
+//        //Grid
+//        graphics.setColor(Color.gray);
+//        for (int i = 0; i < 16; i++) {
+//            for (int j = 0; j < 16; j++) {
+//                graphics.drawRect(i * 32 + xOff, j * 32 + yOff, 32, 32);
+//            }
+//
+//        }
+//
+//        //Border
+//        graphics.setColor(Color.white);
+//        graphics.drawRect(xOff, yOff, 512, 512);
 
         for (Actor actor : this.actors) {
             actor.render(graphics);
@@ -81,6 +131,30 @@ public class Field extends BasicGame {
 
     @Override
     public void keyPressed(int key, char c) {
+        if ((key == Input.KEY_RIGHT) && (direction != "left")) {
+            direction = "right";
+        }
+        if (key == Input.KEY_LEFT && (direction != "right")) {
+            direction = "left";
+        }
+        if (key == Input.KEY_UP && (direction != "down")) {
+            direction = "up";
+        }
+        if (key == Input.KEY_DOWN && (direction != "up")) {
+            direction = "down";
+        }
+
+    }
+
+    public void setRandomFoodBlock() {
+        Random random = new Random();
+        int randomX;
+        int randomY;
+
+        // generate new x, y position until we find a free spot
+
+            randomX = random.nextInt(800) + GRID_SIZE;
+            randomY = random.nextInt(600) + GRID_SIZE;
 
     }
 
@@ -94,47 +168,5 @@ public class Field extends BasicGame {
         }
     }
 
-    public static int getGridSize() {
-        return GRID_SIZE;
-    }
 
-    public Snake getFirst() {
-        return first;
-    }
-
-    public void setFirst(Snake first) {
-        this.first = first;
-    }
-
-    public Snake getLast() {
-        return last;
-    }
-
-    public void setLast(Snake last) {
-        this.last = last;
-    }
-
-    public int getTimeRun() {
-        return timeRun;
-    }
-
-    public void setTimeRun(int timeRun) {
-        this.timeRun = timeRun;
-    }
-
-    public Image getBackground() {
-        return background;
-    }
-
-    public void setBackground(Image background) {
-        this.background = background;
-    }
-
-    public List<Actor> getActors() {
-        return actors;
-    }
-
-    public void setActors(List<Actor> actors) {
-        this.actors = actors;
-    }
 }
