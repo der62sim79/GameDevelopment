@@ -16,7 +16,8 @@ public class Field extends BasicGame {
     private List<Actor> actors;
     public static final int SPEED = 500;
     private String direction;
-    private List<Snake> body;
+    private List<CollisionActor> collisionActors;
+    private Food food;
 
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 420;
@@ -31,6 +32,7 @@ public class Field extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
 
+        this.collisionActors = new ArrayList<>();
         Image tmp = new Image("testdata/myPicture/images.jpg");
         this.background = tmp.getScaledCopy(800, 600);
 
@@ -45,21 +47,29 @@ public class Field extends BasicGame {
         s2.setNext(s3);
         this.tail = s1;
         this.head = s3;
+
         this.actors.add(s1);
         this.actors.add(s2);
         this.actors.add(s3);
+
+
+
+
 
         this.direction = "right";
 
         Food food = new Food();
         this.actors.add(food);
+//        this.collisionActors.add(food);
+        this.head.addCollisionPartner(food);
+        this.tail.addCollisionPartner(food);
 
 
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
-
+        
         for (Actor actor : actors) {
             actor.update(gameContainer, delta);
         }

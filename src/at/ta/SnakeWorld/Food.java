@@ -16,10 +16,11 @@ public class Food implements Actor, CollisionActor {
     private Random random;
     private Shape collisionShape;
 
-    public Food() {
 
+    public Food() {
         this.collisionShape = new Rectangle(randomX, randomY, Field.GRID_SIZE - 5, Field.GRID_SIZE - 5);
         randomFood();
+
 
     }
 
@@ -47,9 +48,13 @@ public class Food implements Actor, CollisionActor {
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
-        collisionShape.setCenterX(randomX + 13);
-        collisionShape.setCenterY(randomY + 13);
+
+        this.collisionShape.setCenterX(randomX + 13);
+        this.collisionShape.setCenterY(randomY + 13);
     }
+
+
+
 
     @Override
     public Shape getCollisionShape() {
@@ -63,4 +68,5 @@ public class Food implements Actor, CollisionActor {
     public int getRandomY() {
         return randomY;
     }
+
 }

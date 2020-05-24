@@ -8,22 +8,30 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Snake implements Actor, CollisionActor {
 
     private int x, y;
     private Snake next;
     private Shape collisionShape;
+    private List<Food> foods;
+
 
     public Snake(int x, int y) {
         this.x = x;
         this.y = y;
-        this.collisionShape = new Rectangle(this.x * Field.GRID_SIZE, this.y * Field.GRID_SIZE, Field.GRID_SIZE - 4, Field.GRID_SIZE - 4);
+        this.collisionShape = new Rectangle(this.x * Field.GRID_SIZE, this.y * Field.GRID_SIZE,
+                Field.GRID_SIZE - 4, Field.GRID_SIZE - 4);
+        this.foods = new ArrayList<>();
     }
 
     @Override
     public void render(Graphics graphics) throws SlickException {
-        graphics.fillRect(this.x * Field.GRID_SIZE, this.y * Field.GRID_SIZE, Field.GRID_SIZE - 4, Field.GRID_SIZE - 4);
+        graphics.fillRect(this.x * Field.GRID_SIZE, this.y * Field.GRID_SIZE, Field.GRID_SIZE - 4,
+                Field.GRID_SIZE - 4);
         graphics.setColor(Color.yellow);
         graphics.draw(collisionShape);
         graphics.setColor(Color.white);
@@ -31,9 +39,14 @@ public class Snake implements Actor, CollisionActor {
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
+        for (Food food : foods) {
+            if (this.collisionShape.intersects(food.getCollisionShape())) {
+                food.randomFood();
+            }
+        }
 
-        collisionShape.setCenterX((this.x * Field.GRID_SIZE) + 14);
-        collisionShape.setCenterY((this.y * Field.GRID_SIZE) + 14);
+        this.collisionShape.setCenterX((this.x * Field.GRID_SIZE) + 14);
+        this.collisionShape.setCenterY((this.y * Field.GRID_SIZE) + 14);
     }
 
     public int getX() {
@@ -65,4 +78,11 @@ public class Snake implements Actor, CollisionActor {
     public Shape getCollisionShape() {
         return collisionShape;
     }
+
+
+    public void addCollisionPartner(Food food) {
+        this.foods.add(food);
+    }
+
+
 }
