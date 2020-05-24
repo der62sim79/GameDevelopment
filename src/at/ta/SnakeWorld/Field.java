@@ -16,6 +16,7 @@ public class Field extends BasicGame {
     private List<Actor> actors;
     public static final int SPEED = 500;
     private String direction;
+    private List<Snake> body;
 
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 420;
@@ -121,6 +122,7 @@ public class Field extends BasicGame {
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }
+
 
     }
 
