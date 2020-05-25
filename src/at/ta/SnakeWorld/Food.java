@@ -15,6 +15,7 @@ public class Food implements Actor, CollisionActor {
     int randomY;
     private Random random;
     private Shape collisionShape;
+    private Snake snake;
 
 
     public Food() {
@@ -47,8 +48,6 @@ public class Food implements Actor, CollisionActor {
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
-
-
         this.collisionShape.setCenterX(randomX + 13);
         this.collisionShape.setCenterY(randomY + 13);
     }

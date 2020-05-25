@@ -17,7 +17,6 @@ public class Field extends BasicGame {
     public static final int SPEED = 500;
     private String direction;
     private List<CollisionActor> collisionActors;
-    private Food food;
 
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 420;
@@ -60,7 +59,7 @@ public class Field extends BasicGame {
 
         Food food = new Food();
         this.actors.add(food);
-//        this.collisionActors.add(food);
+
         this.head.addCollisionPartner(food);
         this.tail.addCollisionPartner(food);
 
