@@ -7,8 +7,6 @@ import java.util.Objects;
 public class Department {
 
 
-
-
     private String name;
     private List<Name> employe;
 
@@ -38,7 +36,7 @@ public class Department {
 
     }
 
-    public void addPersonDepartment (Name name){
+    public void addPersonDepartment(Name name) {
         this.employe.add(name);
     }
 
@@ -57,8 +55,7 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "employe=" + employe +
-                '}';
+
+      return "Department " + name + " Mitarbeiter " + employe;
     }
 }

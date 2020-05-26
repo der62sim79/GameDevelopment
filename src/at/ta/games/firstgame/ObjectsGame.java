@@ -1,5 +1,9 @@
 package at.ta.games.firstgame;
 
+import at.ta.games.firstgame.Movement.LeftMoveStrategy;
+import at.ta.games.firstgame.Movement.MoveStrategy;
+import at.ta.games.firstgame.Movement.RightMoveStrategy;
+import at.ta.games.firstgame.actors.*;
 import org.newdawn.slick.*;
 
 import java.util.ArrayList;
@@ -21,21 +25,42 @@ public class ObjectsGame extends BasicGame {
 
         //objekt wird initiert für den Start
         Random random = new Random();
+
+        /*
         for (int i = 0; i < 10; i++) {
             Rectangle rectangle = new Rectangle(random.nextInt(600), random.nextInt(500),
-                    random.nextInt(50),ObjectDirectionRectangle.LEFT);
+                    random.nextInt(50), ObjectDirectionRectangle.LEFT);
             this.actors.add(rectangle);
         }
-
-        for (int i = 0; i < 10; i++) {
+        */
+        for (int i = 0; i < 4; i++) {
             Circle circle = new Circle();
             this.actors.add(circle);
         }
 
-        for (int i = 0; i < 10; i++) {
-            Ellipse ellipse = new Ellipse(random.nextInt(800), random.nextInt(600), random.nextInt(30));
-            this.actors.add(ellipse);
-        }
+        RightCircle rightCircle1 = new RightCircle();
+        this.actors.add(rightCircle1);
+
+        LeftCircle leftCircle1 = new LeftCircle();
+        this.actors.add(leftCircle1);
+
+        MoveStrategy mor = new RightMoveStrategy(50,50,5);
+        MoveStrategy mor1 = new RightMoveStrategy(500,500,5);
+        MoveStrategy mol = new LeftMoveStrategy(400,400,5);
+        MoveStrategy mol2 = new LeftMoveStrategy(300,300,5);
+
+        Ellipse ellipse = new Ellipse(mor);
+        this.actors.add(ellipse);
+
+        Ellipse ellipse1 = new Ellipse(mol);
+        this.actors.add(ellipse1);
+
+
+        Ellipse ellipse2 = new Ellipse(mor1);
+        this.actors.add(ellipse2);
+
+        Rectangle rectangle = new Rectangle(mol2);
+        this.actors.add(rectangle);
 
     }
 

@@ -1,13 +1,13 @@
-package at.ta.games.firstgame;
+package at.ta.games.firstgame.actors;
 
 import org.newdawn.slick.Graphics;
 
 import java.util.Random;
 
 public class Circle implements Actor {
-    private float x, y;
-    private float speed;
-    private float diameter;
+    protected float x, y;
+    protected float speed;
+    protected float diameter;
     Random random;
 
     public Circle() {

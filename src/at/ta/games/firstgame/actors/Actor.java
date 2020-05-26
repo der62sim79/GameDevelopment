@@ -1,4 +1,4 @@
-package at.ta.games.firstgame;
+package at.ta.games.firstgame.actors;
 
 import org.newdawn.slick.Graphics;
 

@@ -1,8 +1,6 @@
 package at.ta.ioAufgabe;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class IO {
 
@@ -36,7 +34,8 @@ public class IO {
 
                 checkDepartment(splittedValuesArray[1],name);
 
-                System.out.println(distribution);
+
+                System.out.println(buyingDepartment);
 
             }
 
