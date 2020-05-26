@@ -25,23 +25,15 @@ public class IO {
 
                 String[] splittedValuesArray = line.split(";");
 
-                // splitt und einzelene ausgaben
-//                String name = splittedValues[0];
-//                String department = splittedValues[1];
-//                System.out.println(name + " - " + department);
-
                 Name name = new Name(splittedValuesArray[0]);
 
                 checkDepartment(splittedValuesArray[1],name);
 
 
-                System.out.println(buyingDepartment);
+                System.out.println(distributionEU);
 
             }
 
-//            for (Name name:nameList) {
-//                System.out.println(name);
-//            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -23,19 +23,6 @@ public class Department {
         this.name = name;
     }
 
-
-    public List<Name> getEmploye() {
-        return employe;
-    }
-
-    public void setEmploye(List<Name> employe) {
-        this.employe = employe;
-    }
-
-    public void printBaseDataPerson() {
-
-    }
-
     public void addPersonDepartment(Name name) {
         this.employe.add(name);
     }
