@@ -1,9 +1,9 @@
 package at.ta.ioAufgabe;
 
-public class Name {
+public class Person {
     private String name;
 
-    public Name(String name) {
+    public Person(String name) {
         this.name = name;
 
     }
@@ -16,8 +16,7 @@ public class Name {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return " Name " + name;
+    public void prsonName() {
+        System.out.println("Name: " + name);
     }
 }

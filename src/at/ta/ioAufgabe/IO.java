@@ -1,18 +1,31 @@
 package at.ta.ioAufgabe;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IO {
 
-    public static Department management = new Department("Vorstand");
-    public static Department buyingDepartment = new Department("Einkauf");
-    public static Department buyingDepartmentEurope = new Department("Einkauf Europa");
-    public static Department buyingDepartmentItaly = new Department("Einkauf Italien");
-    public static Department buyingDepartmentUSA = new Department("Einkauf USA");
-    public static Department distribution = new Department("Vertrieb");
-    public static Department distributionEU = new Department("Vertrieb Europa");
-
     public static void main(String[] args) {
+
+        Department management = new Department("Vorstand");
+        Department buyingDepartment = new Department("Einkauf");
+        Department buyingDepartmentEurope = new Department("Einkauf Europa");
+        Department buyingDepartmentItaly = new Department("Einkauf Italien");
+        Department buyingDepartmentUSA = new Department("Einkauf USA");
+        Department distribution = new Department("Vertrieb");
+        Department distributionEU = new Department("Vertrieb Europa");
+
+        List<Department> departments = new ArrayList<>();
+
+        departments.add(management);
+        departments.add(buyingDepartmentEurope);
+        departments.add(buyingDepartment);
+        departments.add(buyingDepartmentItaly);
+        departments.add(buyingDepartmentUSA);
+        departments.add(distributionEU);
+        departments.add(distribution);
+
 
         File file = new File("./testdata/abteilungen.txt");
 
@@ -25,13 +38,23 @@ public class IO {
 
                 String[] splittedValuesArray = line.split(";");
 
-                Name name = new Name(splittedValuesArray[0]);
+                for (int i = 0; i < splittedValuesArray.length; i++) {
+                    splittedValuesArray[i] = splittedValuesArray[i].strip();
 
-                checkDepartment(splittedValuesArray[1],name);
+                }
+                if (splittedValuesArray[0] != "PersonenName") {
 
+                    Person person = new Person(splittedValuesArray[0]);
 
-                System.out.println(distributionEU);
+                    for (Department department : departments) {
 
+                        if (department.getName().equals(splittedValuesArray[1])) {
+                            department.addPersonDepartment(person);
+                        }
+
+                    }
+
+                }
             }
 
         } catch (FileNotFoundException e) {
@@ -40,22 +63,9 @@ public class IO {
             e.printStackTrace();
         }
 
-    }
-    public static void checkDepartment (String line, Name name){
-        if (line.equals("Vorstand")){
-            management.addPersonDepartment(name);
-        } else if (line.equals("Einkauf")){
-            buyingDepartment.addPersonDepartment(name);
-        } else if (line.equals("Einkauf Europa")){
-            buyingDepartmentEurope.addPersonDepartment(name);
-        }else if (line.equals("Einkauf Italien")){
-            buyingDepartmentItaly.addPersonDepartment(name);
-        } else if (line.equals("Einkauf USA")){
-            buyingDepartmentUSA.addPersonDepartment(name);
-        }else if (line.equals("Vertrieb")){
-            distribution.addPersonDepartment(name);
-        }else if (line.equals("Vertrieb Europa")){
-            distributionEU.addPersonDepartment(name);
+        for (Department department : departments) {
+            department.printEmploye();
+
         }
     }
 }

@@ -8,11 +8,11 @@ public class Department {
 
 
     private String name;
-    private List<Name> employe;
+    private List<Person> people;
 
     public Department(String name) {
         this.name = name;
-        this.employe = new ArrayList<>();
+        this.people = new ArrayList<>();
     }
 
     public String getName() {
@@ -23,26 +23,15 @@ public class Department {
         this.name = name;
     }
 
-    public void addPersonDepartment(Name name) {
-        this.employe.add(name);
+    public void addPersonDepartment(Person person) {
+        this.people.add(person);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Department)) return false;
-        Department that = (Department) o;
-        return Objects.equals(name, that.name);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
-    public String toString() {
-
-      return "Department " + name + " Mitarbeiter " + employe;
+    public void printEmploye() {
+        System.out.println("Mitarbeiter \"" + this.name + "\":");
+        for (Person person : this.people) {
+            person.prsonName();
+        }
     }
 }
