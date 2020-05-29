@@ -18,6 +18,7 @@ public class IO {
 
         List<Department> departments = new ArrayList<>();
 
+
         departments.add(management);
         departments.add(buyingDepartmentEurope);
         departments.add(buyingDepartment);
