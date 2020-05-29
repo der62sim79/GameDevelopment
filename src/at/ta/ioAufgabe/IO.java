@@ -42,7 +42,7 @@ public class IO {
                     splittedValuesArray[i] = splittedValuesArray[i].strip();
 
                 }
-                if (splittedValuesArray[0] != "PersonenName") {
+                if (splittedValuesArray[0] != null) {
 
                     Person person = new Person(splittedValuesArray[0]);
 
