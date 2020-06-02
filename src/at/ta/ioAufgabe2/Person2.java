@@ -2,10 +2,14 @@ package at.ta.ioAufgabe2;
 
 public class Person2 {
 
-    String personName;
+    private String personName;
+    private Department2 department2;
 
-    public Person2(String personName) {
+
+    public Person2(String personName, Department2 department2) {
         this.personName = personName;
+        this.department2 = department2;
+
     }
 
     public String getPersonName() {
@@ -16,7 +20,16 @@ public class Person2 {
         this.personName = personName;
     }
 
-    public void personName() {
-        System.out.println("Name: " + personName);
+    public Department2 getDepartment2() {
+        return department2;
+    }
+
+    public void setDepartment2(Department2 department2) {
+        this.department2 = department2;
+    }
+
+    @Override
+    public String toString() {
+        return "abteilung = " + department2;
     }
 }

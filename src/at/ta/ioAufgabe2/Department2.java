@@ -1,18 +1,23 @@
 package at.ta.ioAufgabe2;
 
+import at.ta.ioAufgabe.Person;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Department2 {
 
     private String name;
-    private List<Department2> childDepartment;
-    private List<Person2> personen2s;
+    private String parentDepartmentName;
+    private List<Person2> people = new ArrayList<>();
 
-    public Department2(String name) {
+    public Department2(String name, String parentDepartmentName) {
         this.name = name;
-        this.childDepartment = new ArrayList<>();
-        this.personen2s = new ArrayList<>();
+        this.parentDepartmentName = parentDepartmentName;
+    }
+
+    public void addPerson(Person2 person) {
+        people.add(person);
     }
 
     public String getName() {
@@ -23,19 +28,19 @@ public class Department2 {
         this.name = name;
     }
 
-    public void addChildDepartment (Department2 department2){
-        this.childDepartment.add(department2);
+    public String getParentDepartmentName() {
+        return parentDepartmentName;
     }
 
-    public void addPerson (Person2 personen2){
-        this.personen2s.add(personen2);
+    public void setParentDepartmentName(String parentDepartmentName) {
+        this.parentDepartmentName = parentDepartmentName;
     }
 
-    public void printChildDepartment (){
-        System.out.println(" Mitarbeiter \"" + this.name + "\":");
-
+    public List<Person2> getPeople() {
+        return people;
     }
 
-
-
+    public void setPeople(List<Person2> people) {
+        this.people = people;
+    }
 }

@@ -17,11 +17,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class IO2 {
 
     public static void main(String[] args) {
 
-        List<Department2> parent = new ArrayList<>();
+        List<Person2> people = new ArrayList<>();
+        List<Department2> department2List = new ArrayList<>();
+        List<String> departmentResult = new ArrayList<>();
 
         File file = new File("./testdata/abteilung1.txt");
 
@@ -29,35 +32,42 @@ public class IO2 {
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+            bufferedReader.readLine();
 
-            String line;
+            String line = null;
             while ((line = bufferedReader.readLine()) != null) {
-
                 String[] splittedValuesArray = line.split(";");
 
-                for (int i = 0; i < splittedValuesArray.length; i++) {
-                    splittedValuesArray[i] = splittedValuesArray[i].strip();
+                String personName = splittedValuesArray[0];
+                String departmentName = splittedValuesArray[1];
+
+                if (splittedValuesArray.length == 2) {
+                    Department2 department2 = new Department2(departmentName.trim(), "");
+                    Person2 person2 = new Person2(personName, department2);
+                    department2.addPerson(person2);
+                    department2List.add(department2);
+                    people.add(person2);
                 }
-
-                Department2 dep = new Department2(splittedValuesArray[1]);
-                Person2 pers = new Person2(splittedValuesArray[0]);
-                if (splittedValuesArray[1] != null) {
-                    Department2 parent1 = null;
-                    for (Department2 exist : parent) {
-
-                        if (exist.getName().equals(splittedValuesArray[2])) {
-                            parent1 = exist;
-                            break;
-                        }
-
+                if (splittedValuesArray.length == 3) {
+                    String parentDepartmentName = splittedValuesArray[2];
+                    Department2 department2 = new Department2(departmentName.trim(), parentDepartmentName);
+                    Person2 person2 = new Person2(personName, department2);
+                    department2.addPerson(person2);
+                    department2List.add(department2);
+                    people.add(person2);
+                }
+            }
+            for (Department2 departmen : department2List) {
+                if (!departmentResult.contains(departmen.getParentDepartmentName())) {
+                    departmentResult.add(departmen.getParentDepartmentName());
+                }
+            }
+            for (String departmentName : departmentResult) {
+                System.out.println( "Dem "+ departmentName.toUpperCase() + " unterstellte Mitarbeiter: ");
+                for (Person2 person : people) {
+                    if (departmentName.equalsIgnoreCase(person.getDepartment2().getParentDepartmentName())) {
+                        System.out.println(" " + person.getPersonName());
                     }
-
-                    if (parent1 == null) {
-                        Department2 department = new Department2(splittedValuesArray[2]);
-                        parent.add(department);
-                    }
-                    
-                    parent1.addChildDepartment(dep);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -65,8 +75,6 @@ public class IO2 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Department2 department2 : parent) {
-            department2.printChildDepartment();
-        }
+
     }
 }
